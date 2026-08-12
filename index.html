@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heo Quay Thanh Tùng - Mỏ Cày, Vĩnh Long</title>
+    <!-- FontAwesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #e63946;
+            --primary-dark: #b81d24;
+            --accent: #ffb703;
+            --bg-glass: rgba(255, 255, 255, 0.85);
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            --radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f8f9fa;
+            color: #2b2d42;
+            line-height: 1.6;
+        }
+
+        /* Header / Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 70px;
+            padding: 80px 5% 60px;
+            background: linear-gradient(135deg, #111 0%, #2a0808 100%), url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80');
+            background-blend-mode: overlay;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            border-radius: 0 0 40px 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .btn-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.4);
+            transition: 0.3s transform;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Dịch vụ Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: 0.3s;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* Phần Đăng Bài (Admin Panel) */
+        .post-admin {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 60px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .btn-submit {
+            background: #2b2d42;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        /* Danh sách Bài Viết */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .post-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .post-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .post-content {
+            padding: 20px;
+        }
+
+        .post-content h3 {
+            margin-bottom: 10px;
+            color: #111;
+        }
+
+        .post-content p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .post-date {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* Contact Section & Footer */
+        .contact-info {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 40px;
+            border-radius: var(--radius);
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            font-size: 1.8rem;
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 50%;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Floating Call Button */
+        .floating-call {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            text-decoration: none;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-drumstick-bite"></i> THANH TÙNG
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">Giới Thiệu</a></li>
+            <li><a href="#services">Dịch Vụ</a></li>
+            <li><a href="#news">Tin Tức / Ảnh</a></li>
+            <li><a href="#contact">Liên Hệ</a></li>
+        </ul>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>HEO QUAY THANH TÙNG</h1>
+        <p>Chuyên cung cấp heo quay nguyên con thơm ngon, da giòn rụm cho đám tiệc, hỏi, cưới, cúng khai trương tại Vĩnh Long.</p>
+        <a href="tel:0383563137" class="btn-cta">
+            <i class="fa-solid fa-phone"></i> ĐẶT HÀNG NGAY: 0383 563 137
+        </a>
+    </section>
+
+    <div class="container">
+        <!-- Dịch vụ -->
+        <section id="services">
+            <h2 class="section-title">Dịch Vụ Của Chúng Tôi</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fa-solid fa-fire"></i>
+                    <h3>Heo Quay Nguyên Con</h3>
+                    <p>Đủ kích cỡ từ heo sữa đến heo lớn. Da giòn xốp, thịt ngọt đượm vị đậm đà.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-ring"></i>
+                    <h3>Đặt Đám Tiệc, Cưới Hỏi</h3>
+                    <p>Phục vụ trọn gói đám cưới, đám hỏi, tân gia, đầy tháng với mâm tiệc chỉn chu.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    <h3>Giao Hàng Tận Nơi</h3>
+                    <p>Giao hàng nhanh chóng tận nhà tại Mỏ Cày, Vĩnh Long và các khu vực lân cận.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thông tin liên hệ -->
+        <section id="contact">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div>
+                        <h4>Địa Chỉ</h4>
+                        <p>Ấp 3, QL60, Xã Mỏ Cày, Vĩnh Long</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <div>
+                        <h4>Số Điện Thoại</h4>
+                        <p>0383 563 137<br>0963 533 827</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Đăng bài & Hình ảnh (Tích hợp Admin đơn giản) -->
+        <section id="admin" class="post-admin">
+            <h3 style="margin-bottom: 20px;"><i class="fa-solid fa-pen-to-square"></i> Đăng Bài Mới / Cập Nhật Hình Ảnh</h3>
+            <form id="postForm">
+                <div class="form-group">
+                    <label>Tiêu đề bài viết / Hình ảnh</label>
+                    <input type="text" id="postTitle" placeholder="Ví dụ: Mâm heo quay lễ cưới ngày 12/08" required>
+                </div>
+                <div class="form-group">
+                    <label>URL Hình ảnh (Link ảnh)</label>
+                    <input type="url" id="postImage" placeholder="Dán link ảnh tại đây (Ví dụ từ Facebook, Imgur...)" required>
+                </div>
+                <div class="form-group">
+                    <label>Nội dung chi tiết</label>
+                    <textarea id="postContent" rows="4" placeholder="Mô tả món ăn, hình ảnh tiệc..." required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Đăng Bài Ngay</button>
+            </form>
+        </section>
+
+        <!-- Danh sách bài viết công khai -->
+        <section id="news">
+            <h2 class="section-title">Hình Ảnh & Tin Tức Mới Nhất</h2>
+            <div class="posts-grid" id="postsContainer">
+                <!-- Bài viết mặc định -->
+                <div class="post-card">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="Heo quay">
+                    <div class="post-content">
+                        <h3>Heo quay giòn rụm phục vụ đám cưới</h3>
+                        <p>Hình ảnh mâm heo quay nguyên con chuẩn bị giao cho khách hàng tại Xã Mỏ Cày.</p>
+                        <span class="post-date"><i class="fa-regular fa-clock"></i> Mới cập nhật</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Nút gọi điện nhanh -->
+    <a href="tel:0383563137" class="floating-call" title="Gọi Ngay">
+        <i class="fa-solid fa-phone"></i>
+    </a>
+
+    <footer>
+        <p>&copy; 2026 Heo Quay Thanh Tùng. © Bản Quyền Thuộc Về Heo Quay Thanh Tùng.</p>
+    </footer>
+
+    <!-- JavaScript Xử Lý Đăng Bài & Lưu Trữ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const postForm = document.getElementById('postForm');
+            const postsContainer = document.getElementById('postsContainer');
+
+            // Lấy danh sách bài viết từ LocalStorage
+            const loadPosts = () => {
+                const posts = JSON.parse(localStorage.getItem('tt_posts')) || [];
+                posts.forEach(post => renderPost(post));
+            };
+
+            // Hiển thị bài viết ra giao diện
+            const renderPost = (post) => {
+                const postHTML = `
+                    <div class="post-card">
+                        <img src="${post.image}" alt="${post.title}" onerror="this.src='https://via.placeholder.com/600x400?text=Heo+Quay+Thanh+Tung'">
+                        <div class="post-content">
+                            <h3>${post.title}</h3>
+                            <p>${post.content}</p>
+                            <span class="post-date"><i class="fa-regular fa-clock"></i> ${post.date}</span>
+                        </div>
+                    </div>
+                `;
+                postsContainer.insertAdjacentHTML('afterbegin', postHTML);
+            };
+
+            // Xử lý sự kiện đăng bài
+            postForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const title = document.getElementById('postTitle').value;
+                const image = document.getElementById('postImage').value;
+                const content = document.getElementById('postContent').value;
+                const date = new Date().toLocaleDateString('vi-VN');
+
+                const newPost = { title, image, content, date };
+
+                // Lưu vào LocalStorage
+                const posts = JSON.parse(localStorage.getItem('tt_posts')) || [];
+                posts.push(newPost);
+                localStorage.setItem('tt_posts', JSON.stringify(posts));
+
+                // Vẽ bài viết mới ra màn hình
+                renderPost(newPost);
+
+                // Reset Form
+                postForm.reset();
+                alert('Đã đăng bài thành công!');
+            });
+
+            loadPosts();
+        });
+    </script>
+</body>
+</html>
